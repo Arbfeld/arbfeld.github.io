@@ -1,24 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ArbFeld with Volume & Slippage — расчёт прибыли межбиржевого арбитража по живым стаканам с учётом проскальзывания и комиссий." />
+    <meta name="description" content="ArbFeld with Volume &amp; Slippage — cross-exchange spot crypto arbitrage calculator with live order books, slippage, and fee analysis." />
+    <meta property="og:title" content="ArbFeld" />
+    <meta property="og:description" content="ArbFeld with Volume &amp; Slippage — cross-exchange spot crypto arbitrage calculator with live order books, slippage, and fee analysis." />
     <meta name="google-site-verification" content="bu9QX1-Og6xPt1Oz7QCTF4obbgnZ8dpZipjagnXkvRY" />
     <title>ArbFeld</title>
     <script>
-      // тёмная тема применяется до первого рендера, чтобы не мигало
       try {
-        var t = localStorage.getItem('arb.theme');
-        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark');
-        }
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('arb.theme', 'dark');
       } catch (e) {}
+      if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
+        var origFetch = window.fetch.bind(window);
+        window.fetch = function (input, init) {
+          if (typeof input === 'string' && input.indexOf('https://www.bitstamp.net/') === 0) {
+            input = '/proxy/bitstamp/' + input.slice('https://www.bitstamp.net/'.length);
+          }
+          return origFetch(input, init);
+        };
+      }
     </script>
-    <script type="module" crossorigin src="/assets/index-C_-Q1-KH.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BsL8qzJq.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" crossorigin href="/assets/index-BsL8qzJq.css?v=20261105">
+    <link rel="stylesheet" href="/cyber-obsidian.css?v=20261105">
+    <script type="module" crossorigin src="/assets/index-C_-Q1-KH.js?v=20261105"></script>
+    <script type="module" src="/cyber-obsidian.js?v=20261105"></script>
   </head>
   <body>
+    <div id="aurora-backdrop" aria-hidden="true"></div>
+    <canvas id="quantum-canvas" aria-hidden="true" data-testid="quantum-particle-canvas"></canvas>
     <div id="root"></div>
   </body>
 </html>
