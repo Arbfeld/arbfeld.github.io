@@ -1,0 +1,16 @@
+{
+  "name": "arbfeld",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node --check server.js && node --check proxy-utils.js && node --check particle-physics.js && node --check cyber-obsidian.js",
+    "lint": "node --check server.js && node --check proxy-utils.js && node --check particle-physics.js && node --check cyber-obsidian.js",
+    "test": "node --test proxy-utils.test.js particle-physics.test.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

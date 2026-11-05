@@ -1,0 +1,8 @@
+{
+  "name": "ArbFeld",
+  "description": "ArbFeld with Volume & Slippage — cross-exchange spot crypto arbitrage calculator with live order books, slippage, and fee analysis.",
+  "requestFramePermissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
